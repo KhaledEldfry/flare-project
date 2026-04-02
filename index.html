@@ -3,185 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flare Fitness — Campaign Submission</title>
+  <title>Flare Fitness — Offer Submission</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #fff; font-family: 'Poppins', sans-serif; color: #1A1A1A; -webkit-font-smoothing: antialiased; }
-
-    /* Navbar */
     .nav { background: #E8632B; height: 58px; display: flex; align-items: center; padding: 0 24px; position: sticky; top: 0; z-index: 50; }
     .nav img { height: 34px; object-fit: contain; }
-
-    /* Container */
     .container { max-width: 680px; margin: 0 auto; padding: 36px 20px 60px; }
     .heading { font-size: 22px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.2px; }
     .subheading { font-size: 13.5px; color: #666; line-height: 1.55; margin-bottom: 32px; }
-
-    /* Fields */
     .field { margin-bottom: 22px; }
     .label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; color: #1A1A1A; }
     .label-ar { display: block; font-size: 12px; font-weight: 300; color: #999; margin-bottom: 7px; direction: rtl; text-align: left; }
-    .input, .textarea {
-      width: 100%; font-family: 'Poppins', sans-serif; font-size: 14px; padding: 10px 13px;
-      background: #F7F7F7; border: 1.5px solid #E0E0E0; border-radius: 6px; color: #1A1A1A;
-      outline: none; transition: border-color 0.2s;
-    }
+    .input, .textarea { width: 100%; font-family: 'Poppins', sans-serif; font-size: 14px; padding: 10px 13px; background: #F7F7F7; border: 1.5px solid #E0E0E0; border-radius: 6px; color: #1A1A1A; outline: none; transition: border-color 0.2s; }
     .input:focus, .textarea:focus { border-color: #E8632B; background: #fff; }
     .input::placeholder, .textarea::placeholder { color: #AAA; font-weight: 300; }
     .textarea { resize: vertical; min-height: 110px; line-height: 1.55; }
-
-    /* Date row */
     .date-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 480px) { .date-row { grid-template-columns: 1fr; } }
-
-    /* Branches */
     .branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
     @media (max-width: 480px) { .branch-grid { grid-template-columns: 1fr; } }
-    .check-label {
-      display: flex; align-items: center; gap: 8px; font-size: 13.5px;
-      padding: 7px 0; cursor: pointer; user-select: none; color: #333;
-    }
+    .check-label { display: flex; align-items: center; gap: 8px; font-size: 13.5px; padding: 7px 0; cursor: pointer; user-select: none; color: #333; }
     .check-label.--all { grid-column: 1 / -1; font-weight: 600; color: #E8632B; border-bottom: 1px solid #F0F0F0; padding-bottom: 8px; margin-bottom: 2px; }
     .check-label input[type="checkbox"] { accent-color: #E8632B; width: 16px; height: 16px; cursor: pointer; }
-
-    /* Pills */
     .pills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .pill {
-      font-family: 'Poppins', sans-serif; font-size: 13px; padding: 6px 15px; border-radius: 20px;
-      border: 1.5px solid #D0D0D0; background: #fff; color: #555; cursor: pointer;
-      font-weight: 500; transition: all 0.15s; user-select: none;
-    }
+    .pill { font-family: 'Poppins', sans-serif; font-size: 13px; padding: 6px 15px; border-radius: 20px; border: 1.5px solid #D0D0D0; background: #fff; color: #555; cursor: pointer; font-weight: 500; transition: all 0.15s; user-select: none; }
     .pill:hover { border-color: #E8632B; color: #E8632B; }
     .pill.--active { background: #E8632B; color: #fff; border-color: #E8632B; }
-
-    /* Upload zone */
-    .drop {
-      border: 2px dashed #D0D0D0; border-radius: 8px; padding: 28px 20px;
-      text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #FAFAFA;
-    }
+    .drop { border: 2px dashed #D0D0D0; border-radius: 8px; padding: 28px 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #FAFAFA; }
     .drop:hover, .drop.--over { border-color: #E8632B; background: #FFF7F4; }
     .drop-icon { font-size: 28px; color: #CCC; margin-bottom: 6px; }
     .drop-text { font-size: 13.5px; color: #888; }
     .drop-text span { color: #E8632B; font-weight: 600; text-decoration: underline; cursor: pointer; }
     .drop-hint { font-size: 11.5px; color: #BBB; margin-top: 4px; }
-
-    /* Thumbnails */
     .thumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .thumb {
-      position: relative; width: 76px; height: 76px; border-radius: 6px;
-      overflow: hidden; border: 1.5px solid #E8E8E8; background: #F5F5F5;
-    }
+    .thumb { position: relative; width: 76px; height: 76px; border-radius: 6px; overflow: hidden; border: 1.5px solid #E8E8E8; background: #F5F5F5; }
     .thumb img, .thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .thumb-x {
-      position: absolute; top: 2px; right: 2px; width: 20px; height: 20px;
-      background: rgba(0,0,0,0.55); color: #fff; border: none; border-radius: 50%;
-      font-size: 13px; line-height: 20px; text-align: center; cursor: pointer;
-    }
-    .thumb-name {
-      position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5);
-      color: #fff; font-size: 9px; padding: 2px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    /* Error */
+    .thumb-x { position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; background: rgba(0,0,0,0.55); color: #fff; border: none; border-radius: 50%; font-size: 13px; line-height: 20px; text-align: center; cursor: pointer; }
+    .thumb-name { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); color: #fff; font-size: 9px; padding: 2px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .error { font-size: 12px; color: #E74C3C; margin-top: 4px; }
-
-    /* Divider */
     .divider { border: none; border-top: 1px solid #F0F0F0; margin: 28px 0; }
-
-    /* Submit button */
-    .submit {
-      width: 100%; padding: 13px; font-family: 'Poppins', sans-serif; font-size: 15px;
-      font-weight: 700; color: #fff; background: #E8632B; border: none; border-radius: 7px;
-      cursor: pointer; transition: background 0.2s; margin-top: 8px; letter-spacing: 0.2px;
-    }
+    .submit { width: 100%; padding: 13px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; color: #fff; background: #E8632B; border: none; border-radius: 7px; cursor: pointer; transition: background 0.2s; margin-top: 8px; letter-spacing: 0.2px; }
     .submit:hover:not(:disabled) { background: #D4551F; }
     .submit:disabled { opacity: 0.7; cursor: not-allowed; }
     .submit-hint { text-align: center; font-size: 12px; color: #AAA; margin-top: 10px; }
-
-    /* Spinner */
     @keyframes spin { to { transform: rotate(360deg); } }
-    .spinner {
-      display: inline-block; width: 16px; height: 16px;
-      border: 2.5px solid rgba(255,255,255,0.35); border-top-color: #fff;
-      border-radius: 50%; animation: spin 0.6s linear infinite;
-      vertical-align: middle; margin-right: 8px;
-    }
-
-    /* Success screen */
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 8px; }
     .success { text-align: center; padding: 80px 20px; max-width: 440px; margin: 0 auto; }
     .success img { height: 38px; margin-bottom: 28px; }
-    .success-icon {
-      width: 56px; height: 56px; border-radius: 50%; background: #FFF3ED;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
-    }
+    .success-icon { width: 56px; height: 56px; border-radius: 50%; background: #FFF3ED; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
     .success-icon svg { width: 28px; height: 28px; }
     .success h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
     .success p { font-size: 14px; color: #888; margin-bottom: 28px; }
-    .success button {
-      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600;
-      padding: 11px 32px; background: #E8632B; color: #fff; border: none;
-      border-radius: 7px; cursor: pointer; transition: background 0.2s;
-    }
+    .success button { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; padding: 11px 32px; background: #E8632B; color: #fff; border: none; border-radius: 7px; cursor: pointer; transition: background 0.2s; }
     .success button:hover { background: #D4551F; }
-
     .hidden { display: none; }
   </style>
 </head>
 <body>
-
-  <!-- Navbar -->
   <nav class="nav">
     <img src="https://zfloos-production-storage.s3.eu-central-1.amazonaws.com/public/upload/companies/4035/null/6172232519866a898cec9f0b5_60720978.png" alt="Flare Fitness" />
   </nav>
-
   <div class="container">
-
-    <!-- ═══ Success Screen ═══ -->
     <div id="successScreen" class="success hidden">
       <img src="https://zfloos-production-storage.s3.eu-central-1.amazonaws.com/public/upload/companies/4035/null/6172232519866a898cec9f0b5_60720978.png" alt="Flare Fitness" />
       <div class="success-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#E8632B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E8632B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
       </div>
-      <h2>Campaign submitted successfully!</h2>
+      <h2>Offer submitted successfully!</h2>
       <p>Our team will review and activate it shortly.</p>
-      <button onclick="resetForm()">Submit Another Campaign</button>
+      <button onclick="resetForm()">Submit Another Offer</button>
     </div>
 
-    <!-- ═══ Form ═══ -->
     <div id="formContainer">
-      <h1 class="heading">New Campaign</h1>
-      <p class="subheading">Submit a new campaign for the AI agent to promote. All fields are optional — fill in what you have.</p>
-
-      <form id="campaignForm" novalidate>
-
-        <!-- Campaign Title -->
+      <h1 class="heading">New Offer</h1>
+      <p class="subheading">Submit a new offer for the AI agent to promote. All fields are optional — fill in what you have.</p>
+      <form id="offerForm" novalidate>
         <div class="field">
-          <label class="label">Campaign Title</label>
+          <label class="label">Offer Title</label>
           <span class="label-ar">اسم العرض</span>
-          <input class="input" type="text" id="title" placeholder="e.g. Soul Membership — Summer Offer" />
+          <input class="input" type="text" id="title" placeholder="e.g. Eid Fitar Offers — Future Kid" />
         </div>
-
-        <!-- Description -->
         <div class="field">
           <label class="label">Description</label>
           <span class="label-ar">الوصف</span>
-          <textarea class="textarea" id="description" placeholder="Campaign details, what's included, terms & conditions..."></textarea>
+          <textarea class="textarea" id="description" placeholder="Offer details, what's included, pricing, terms & conditions..."></textarea>
         </div>
-
-        <!-- Pricing -->
-        <div class="field">
-          <label class="label">Pricing</label>
-          <span class="label-ar">الأسعار</span>
-          <input class="input" type="text" id="pricing" placeholder="e.g. 99 KWD / month, Free, From 25 KWD" />
-        </div>
-
         <hr class="divider" />
-
-        <!-- Media -->
         <div class="field">
           <label class="label">Media</label>
           <span class="label-ar">الميديا</span>
@@ -193,10 +103,7 @@
           <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,video/mp4" multiple style="display:none" />
           <div class="thumbs" id="thumbs"></div>
         </div>
-
         <hr class="divider" />
-
-        <!-- Dates -->
         <div class="field">
           <div class="date-row">
             <div>
@@ -212,271 +119,84 @@
             </div>
           </div>
         </div>
-
         <hr class="divider" />
-
-        <!-- Branches -->
         <div class="field">
           <label class="label">Branches</label>
           <span class="label-ar">الفروع</span>
           <div class="branch-grid" id="branchGrid"></div>
         </div>
-
         <hr class="divider" />
-
-        <!-- Tags -->
         <div class="field">
           <label class="label">Tags</label>
           <span class="label-ar">التصنيف</span>
           <div class="pills" id="tagPills"></div>
         </div>
-
         <hr class="divider" />
-
-        <!-- Client -->
         <div class="field">
           <label class="label">Client</label>
           <span class="label-ar">العميل</span>
           <div class="pills" id="clientPills"></div>
         </div>
-
         <hr class="divider" />
-
-        <!-- Campaign Link -->
         <div class="field">
-          <label class="label">Campaign Link</label>
+          <label class="label">Offer Link</label>
           <span class="label-ar">لينك العرض</span>
           <input class="input" type="url" id="link" placeholder="https://flare.fitness/en/products/..." />
           <div class="error hidden" id="linkError">Please enter a valid URL (e.g. https://flare.fitness/...)</div>
         </div>
-
-        <!-- Submit error -->
         <div class="error hidden" id="submitError" style="text-align:center;margin-bottom:10px"></div>
-
-        <!-- Submit -->
-        <button type="submit" class="submit" id="submitBtn">Submit Campaign</button>
-        <p class="submit-hint">Your campaign will be reviewed and activated by our team.</p>
-
+        <button type="submit" class="submit" id="submitBtn">Submit Offer</button>
+        <p class="submit-hint">Your offer will be reviewed and activated by our team.</p>
       </form>
     </div>
   </div>
-
 <script>
-// ─── Data ────────────────────────────────────────────────────────────────────
-const BRANCHES = [
-  "Sabah Al Salem", "Men MT Jabriya", "Women MT Jabriya", "Women DT Sharq",
-  "Soul by Flare (Sharq)", "Men Shuwaikh", "Women UT Sharq"
-];
-const TAGS = [
-  "Membership", "Personal Training", "Classes", "Offer/Discount",
-  "Event", "Seasonal", "New Service", "Other"
-];
-const CLIENTS = ["Flare", "Macro"];
+const BRANCHES=["Sabah Al Salem","Men MT Jabriya","Women MT Jabriya","Women DT Sharq","Soul by Flare (Sharq)","Men Shuwaikh","Women UT Sharq"];
+const TAGS=["Membership","Personal Training","Classes","Offer/Discount","Event","Seasonal","New Service","Other"];
+const CLIENTS=["Flare","Macro"];
+let selectedBranches=[],selectedTags=[],selectedClient="",uploadedFiles=[];
 
-let selectedBranches = [];
-let selectedTags = [];
-let selectedClient = "";
-let uploadedFiles = [];
+function renderBranches(){const g=document.getElementById("branchGrid");const a=selectedBranches.length===BRANCHES.length;let h=`<label class="check-label --all"><input type="checkbox" ${a?"checked":""} onchange="toggleAllBranches(this.checked)"/> All Branches</label>`;BRANCHES.forEach(b=>{h+=`<label class="check-label"><input type="checkbox" ${selectedBranches.includes(b)?"checked":""} ${a?"disabled":""} onchange="toggleBranch('${b}')"/> ${b}</label>`;});g.innerHTML=h;}
+function toggleAllBranches(c){selectedBranches=c?[...BRANCHES]:[];renderBranches();}
+function toggleBranch(b){selectedBranches=selectedBranches.includes(b)?selectedBranches.filter(x=>x!==b):[...selectedBranches,b];renderBranches();}
+function renderTags(){document.getElementById("tagPills").innerHTML=TAGS.map(t=>`<button type="button" class="pill ${selectedTags.includes(t)?'--active':''}" onclick="toggleTag('${t}')">${t}</button>`).join("");}
+function toggleTag(t){selectedTags=selectedTags.includes(t)?selectedTags.filter(x=>x!==t):[...selectedTags,t];renderTags();}
+function renderClients(){document.getElementById("clientPills").innerHTML=CLIENTS.map(c=>`<button type="button" class="pill ${selectedClient===c?'--active':''}" onclick="toggleClient('${c}')">${c}</button>`).join("");}
+function toggleClient(c){selectedClient=selectedClient===c?"":c;renderClients();}
 
-// ─── Render branches ─────────────────────────────────────────────────────────
-function renderBranches() {
-  const grid = document.getElementById("branchGrid");
-  const allChecked = selectedBranches.length === BRANCHES.length;
+const dropZone=document.getElementById("dropZone"),fileInput=document.getElementById("fileInput");
+dropZone.addEventListener("click",()=>fileInput.click());
+dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.classList.add("--over");});
+dropZone.addEventListener("dragleave",()=>dropZone.classList.remove("--over"));
+dropZone.addEventListener("drop",e=>{e.preventDefault();dropZone.classList.remove("--over");addFiles(e.dataTransfer.files);});
+fileInput.addEventListener("change",e=>{addFiles(e.target.files);e.target.value="";});
+function addFiles(fl){const ok=["image/jpeg","image/png","image/webp","video/mp4"];uploadedFiles=[...uploadedFiles,...Array.from(fl).filter(f=>ok.includes(f.type))].slice(0,5);renderThumbs();}
+function removeFile(i){uploadedFiles.splice(i,1);renderThumbs();}
+function renderThumbs(){const c=document.getElementById("thumbs");if(!uploadedFiles.length){c.innerHTML="";return;}c.innerHTML=uploadedFiles.map((f,i)=>{const u=URL.createObjectURL(f);const m=f.type.startsWith("video")?`<video src="${u}" muted></video>`:`<img src="${u}" alt=""/>`;return`<div class="thumb">${m}<button type="button" class="thumb-x" onclick="removeFile(${i})">✕</button><div class="thumb-name">${f.name}</div></div>`;}).join("");}
+function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res({name:file.name,type:file.type,data:r.result.split(",")[1]});r.onerror=()=>rej(new Error("Read failed"));r.readAsDataURL(file);});}
 
-  let html = `<label class="check-label --all">
-    <input type="checkbox" ${allChecked ? "checked" : ""} onchange="toggleAllBranches(this.checked)" />
-    All Branches
-  </label>`;
+function validate(){let v=true;const l=document.getElementById("link").value,s=document.getElementById("startDate").value,e=document.getElementById("endDate").value;
+const le=document.getElementById("linkError");if(l&&!/^https?:\/\/.+\..+/.test(l)){le.classList.remove("hidden");v=false;}else{le.classList.add("hidden");}
+const ee=document.getElementById("endDateError");if(s&&e&&e<s){ee.classList.remove("hidden");v=false;}else{ee.classList.add("hidden");}return v;}
 
-  BRANCHES.forEach(b => {
-    const checked = selectedBranches.includes(b);
-    html += `<label class="check-label">
-      <input type="checkbox" ${checked ? "checked" : ""} ${allChecked ? "disabled" : ""}
-        onchange="toggleBranch('${b}')" />
-      ${b}
-    </label>`;
-  });
-  grid.innerHTML = html;
-}
-
-function toggleAllBranches(checked) {
-  selectedBranches = checked ? [...BRANCHES] : [];
-  renderBranches();
-}
-
-function toggleBranch(b) {
-  if (selectedBranches.includes(b)) {
-    selectedBranches = selectedBranches.filter(x => x !== b);
-  } else {
-    selectedBranches.push(b);
-  }
-  renderBranches();
-}
-
-// ─── Render tags ─────────────────────────────────────────────────────────────
-function renderTags() {
-  const container = document.getElementById("tagPills");
-  container.innerHTML = TAGS.map(t =>
-    `<button type="button" class="pill ${selectedTags.includes(t) ? '--active' : ''}" onclick="toggleTag('${t}')">${t}</button>`
-  ).join("");
-}
-
-function toggleTag(t) {
-  if (selectedTags.includes(t)) {
-    selectedTags = selectedTags.filter(x => x !== t);
-  } else {
-    selectedTags.push(t);
-  }
-  renderTags();
-}
-
-// ─── Render clients ──────────────────────────────────────────────────────────
-function renderClients() {
-  const container = document.getElementById("clientPills");
-  container.innerHTML = CLIENTS.map(c =>
-    `<button type="button" class="pill ${selectedClient === c ? '--active' : ''}" onclick="toggleClient('${c}')">${c}</button>`
-  ).join("");
-}
-
-function toggleClient(c) {
-  selectedClient = selectedClient === c ? "" : c;
-  renderClients();
-}
-
-// ─── File upload ─────────────────────────────────────────────────────────────
-const dropZone = document.getElementById("dropZone");
-const fileInput = document.getElementById("fileInput");
-
-dropZone.addEventListener("click", () => fileInput.click());
-dropZone.addEventListener("dragover", e => { e.preventDefault(); dropZone.classList.add("--over"); });
-dropZone.addEventListener("dragleave", () => dropZone.classList.remove("--over"));
-dropZone.addEventListener("drop", e => {
-  e.preventDefault();
-  dropZone.classList.remove("--over");
-  addFiles(e.dataTransfer.files);
-});
-fileInput.addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
-
-function addFiles(fileList) {
-  const allowed = ["image/jpeg", "image/png", "image/webp", "video/mp4"];
-  const valid = Array.from(fileList).filter(f => allowed.includes(f.type));
-  uploadedFiles = [...uploadedFiles, ...valid].slice(0, 5);
-  renderThumbs();
-}
-
-function removeFile(idx) {
-  uploadedFiles.splice(idx, 1);
-  renderThumbs();
-}
-
-function renderThumbs() {
-  const container = document.getElementById("thumbs");
-  if (uploadedFiles.length === 0) { container.innerHTML = ""; return; }
-  container.innerHTML = uploadedFiles.map((f, i) => {
-    const url = URL.createObjectURL(f);
-    const media = f.type.startsWith("video")
-      ? `<video src="${url}" muted></video>`
-      : `<img src="${url}" alt="" />`;
-    return `<div class="thumb">
-      ${media}
-      <button type="button" class="thumb-x" onclick="removeFile(${i})">✕</button>
-      <div class="thumb-name">${f.name}</div>
-    </div>`;
-  }).join("");
-}
-
-// ─── Validation ──────────────────────────────────────────────────────────────
-function validate() {
-  let valid = true;
-  const link = document.getElementById("link").value;
-  const startDate = document.getElementById("startDate").value;
-  const endDate = document.getElementById("endDate").value;
-
-  // Link
-  const linkErr = document.getElementById("linkError");
-  if (link && !/^https?:\/\/.+\..+/.test(link)) {
-    linkErr.classList.remove("hidden"); valid = false;
-  } else {
-    linkErr.classList.add("hidden");
-  }
-
-  // End date
-  const endErr = document.getElementById("endDateError");
-  if (startDate && endDate && endDate < startDate) {
-    endErr.classList.remove("hidden"); valid = false;
-  } else {
-    endErr.classList.add("hidden");
-  }
-
-  return valid;
-}
-
-// ─── Submit ──────────────────────────────────────────────────────────────────
-document.getElementById("campaignForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  if (!validate()) return;
-
-  const btn = document.getElementById("submitBtn");
-  const errEl = document.getElementById("submitError");
-  errEl.classList.add("hidden");
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Submitting...';
-
-  try {
-    const res = await fetch("/api/submit-campaign", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
-        pricing: document.getElementById("pricing").value,
-        startDate: document.getElementById("startDate").value,
-        endDate: document.getElementById("endDate").value,
-        branches: selectedBranches,
-        tags: selectedTags,
-        client: selectedClient,
-        link: document.getElementById("link").value,
-      }),
-    });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || err.details || "Submission failed");
-    }
-
-    // Success
-    document.getElementById("formContainer").classList.add("hidden");
-    document.getElementById("successScreen").classList.remove("hidden");
-
-  } catch (err) {
-    errEl.textContent = err.message || "Something went wrong. Please try again.";
-    errEl.classList.remove("hidden");
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = "Submit Campaign";
-  }
+document.getElementById("offerForm").addEventListener("submit",async(ev)=>{
+  ev.preventDefault();if(!validate())return;
+  const btn=document.getElementById("submitBtn"),errEl=document.getElementById("submitError");
+  errEl.classList.add("hidden");btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Submitting...';
+  try{
+    const mediaFiles=await Promise.all(uploadedFiles.map(f=>fileToBase64(f)));
+    const res=await fetch("/api/submit-campaign",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({title:document.getElementById("title").value,description:document.getElementById("description").value,
+        startDate:document.getElementById("startDate").value,endDate:document.getElementById("endDate").value,
+        branches:selectedBranches,tags:selectedTags,client:selectedClient,link:document.getElementById("link").value,media:mediaFiles})});
+    if(!res.ok){const err=await res.json().catch(()=>({}));throw new Error(err.error||err.details||"Submission failed");}
+    document.getElementById("formContainer").classList.add("hidden");document.getElementById("successScreen").classList.remove("hidden");
+  }catch(err){errEl.textContent=err.message||"Something went wrong.";errEl.classList.remove("hidden");
+  }finally{btn.disabled=false;btn.innerHTML="Submit Offer";}
 });
 
-// ─── Reset ───────────────────────────────────────────────────────────────────
-function resetForm() {
-  document.getElementById("campaignForm").reset();
-  selectedBranches = [];
-  selectedTags = [];
-  selectedClient = "";
-  uploadedFiles = [];
-  renderBranches();
-  renderTags();
-  renderClients();
-  renderThumbs();
-  document.getElementById("formContainer").classList.remove("hidden");
-  document.getElementById("successScreen").classList.add("hidden");
-}
-
-// ─── Init ────────────────────────────────────────────────────────────────────
-renderBranches();
-renderTags();
-renderClients();
+function resetForm(){document.getElementById("offerForm").reset();selectedBranches=[];selectedTags=[];selectedClient="";uploadedFiles=[];renderBranches();renderTags();renderClients();renderThumbs();document.getElementById("formContainer").classList.remove("hidden");document.getElementById("successScreen").classList.add("hidden");}
+renderBranches();renderTags();renderClients();
 </script>
 </body>
 </html>
