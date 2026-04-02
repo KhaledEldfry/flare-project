@@ -1,12 +1,5 @@
 {
   "name": "flare-campaign-form",
   "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "vercel dev",
-    "build": "echo 'Static frontend — no build needed'",
-    "deploy": "vercel --prod"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  "private": true
 }
